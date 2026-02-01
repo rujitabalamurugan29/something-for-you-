@@ -1,287 +1,150 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title> LOVE ON YOU </title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Our Love Story 🌻</title>
 
-    <style>
-        /* Butterfly Cursor */
-        body {
-            cursor: url('https://cur.cursors-4u.net/nature/nat-1/nat57.cur'), auto;
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(135deg, #ff8ba0, #ffb3cd, #ffd6e8);
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-family: "Poppins", sans-serif;
-            overflow: hidden;
-        }
+<style>
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: black;
+    color: white;
+    text-align: center;
+    overflow: hidden;
+}
 
-        .container {
-            text-align: center;
-            animation: fadeIn 2s ease;
-        }
+section {
+    display: none;
+    padding-top: 80px;
+    height: 100vh;
+}
 
-        h1 {
-            color: #fff;
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            text-shadow: 0 3px 10px rgba(255, 0, 80, 0.4);
-        }
+.active { display: block; }
 
-        .btn {
-            background: #ff477e;
-            border: none;
-            padding: 15px 35px;
-            border-radius: 40px;
-            color: white;
-            font-size: 1.2rem;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(255, 71, 126, 0.4);
-            transition: 0.3s;
-        }
+h1 {
+    animation: glow 2s infinite alternate;
+}
 
-        .btn:hover {
-            transform: scale(1.1);
-            background: #ff1e60;
-        }
+@keyframes glow {
+    from { text-shadow: 0 0 10px #fff; }
+    to { text-shadow: 0 0 30px #ff4d6d; }
+}
 
-        /* Love letter popup */
-        .letter {
-            width: 320px;
-            max-height: 260px;
-            background: #ffd6e8;
-            padding: 20px;
-            border-radius: 15px;
-            border: 4px solid #ff9ac7; /* ribbon border */
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%) scale(0);
-            box-shadow: 0 0 25px rgba(255, 0, 80, 0.5); /* glow */
-            opacity: 0;
-            transition: 0.5s;
-            text-align: center;
-            overflow-y: auto;
-        }
+button {
+    padding: 12px 25px;
+    font-size: 16px;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: 0.3s;
+}
 
-        .letter.show {
-            transform: translate(-50%, -50%) scale(1);
-            opacity: 1;
-        }
+button:hover { transform: scale(1.1); }
 
-        /* Bow */
-        .bow {
-            position: absolute;
-            top: -18px;
-            right: -12px;
-            font-size: 2.2rem;
-            animation: sparkleBow 1.5s infinite alternate;
-        }
+textarea {
+    width: 80%;
+    max-width: 350px;
+    height: 120px;
+    border-radius: 15px;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+}
 
-        @keyframes sparkleBow {
-            from { transform: scale(1); filter: brightness(1); }
-            to   { transform: scale(1.15); filter: brightness(1.4); }
-        }
+#yesBtn { background: #ff0055; color: white; }
+#noBtn  { background: #444; color: white; position: absolute; }
 
-        /* Button inside letter */
-        .inside-btn {
-            margin-top: 15px;
-            background: #ff6b81;
-            padding: 10px 25px;
-            border-radius: 30px;
-            color: white;
-            font-size: 1rem;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 3px 10px rgba(255,0,0,0.3);
-        }
+.message {
+    font-size: 1.2rem;
+    margin-top: 20px;
+}
 
-        .inside-btn:hover {
-            transform: scale(1.1);
-        }
+/* 🌸 Pink background only for Section 3 */
+#valentine {
+    background: linear-gradient(135deg, #ff9a9e, #ff4d6d);
+}
 
-        /* Typing */
-        .typing {
-            margin-top: 25px;
-            font-size: 1.8rem;
-            color: white;
-            height: 40px;
-            white-space: nowrap;
-            overflow: hidden;
-            border-right: 3px solid white;
-            width: 0;
-            animation: typing 3s steps(40) forwards;
-        }
+/* 🌻 Floating Sunflowers */
+.sunflowers span {
+    position: absolute;
+    bottom: -60px;
+    font-size: 28px;
+    animation: float 8s linear infinite;
+}
 
-        @keyframes typing {
-            from { width: 0; }
-            to { width: 100%; }
-        }
-
-        /* Floating hearts stronger */
-        .heart {
-            position: absolute;
-            color: #ff1e60;
-            font-size: 25px;
-            animation: floatUp 4s linear infinite;
-            opacity: 0.8;
-        }
-
-        @keyframes floatUp {
-            0% { transform: translateY(0) scale(1); opacity: 1; }
-            100% { transform: translateY(-650px) scale(2); opacity: 0; }
-        }
-
-        /* Butterflies */
-        .butterfly {
-            position: absolute;
-            font-size: 28px;
-            animation: fly 6s linear infinite;
-        }
-
-        @keyframes fly {
-            0% { transform: translateY(0) translateX(0) rotate(0); }
-            50% { transform: translateY(-200px) translateX(50px) rotate(20deg); }
-            100% { transform: translateY(-400px) translateX(-50px) rotate(-20deg); opacity: 0; }
-        }
-
-        /* Sparkles */
-        .sparkle {
-            position: absolute;
-            font-size: 10px;
-            color: white;
-            animation: sparkleAnim 1.2s linear infinite;
-        }
-
-        @keyframes sparkleAnim {
-            0% { opacity: 0; transform: scale(0); }
-            50% { opacity: 1; transform: scale(1.3); }
-            100% { opacity: 0; transform: scale(0); }
-        }
-
-        /* Fade in */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-    </style>
+@keyframes float {
+    0% { transform: translateY(0) rotate(0); opacity: 1; }
+    100% { transform: translateY(-900px) rotate(360deg); opacity: 0; }
+}
+</style>
 </head>
 
-<body onclick="createExplosion(event)">
+<body>
 
-    <div class="container">
-        <h1>Something special for somwone I LOVE ❤️</h1>
-        <button class="btn" onclick="startAll()">TOUCH❤️</button>
-        <div id="typing" class="typing"></div>
-    </div>
+<!-- SECTION 1 -->
+<section id="welcome" class="active">
+    <h1>Hey You 🌙</h1>
+    <p>I have something special for you...</p>
+    <button onclick="nextSection('letter')">Open My Letter 💌</button>
+</section>
 
-    <!-- LOVE LETTER BOX -->
-    <div class="letter" id="letterBox">
-        <span class="bow">🎀</span>
+<!-- SECTION 2 -->
+<section id="letter">
+    <h1>My Love Letter 💕</h1>
+    <textarea placeholder="HEY GOWTHAM,,,,
+                                    guttu,thangam vida GOWTHAM feel soo romatic and thanks for everthing and u showed me not just in words only by action gowtham maa you are my everything and i beleive you more that anything just would be and its FIRST valentine of us but i known you are mine still I WANT YOU ASK !!!!!"></textarea>
+    <br>
+    <button onclick="nextSection('valentine')">Continue 🌻</button>
+</section>
 
-        <h2>💌</h2>
+<!-- SECTION 3 -->
+<section id="valentine">
+    <h1>WILL YOU BE MY  FOREVER VALENTINE? 💘</h1>
+    <button id="yesBtn" onclick="yesLove()">YES 💖</button>
+    <button id="noBtn">NO 🙈</button>
+</section>
 
-        <p>Hey Gowtham ik guttu name oda i love to call you Gowtham and love soo much , this is being very short time that we started to talk and date idk y i let you this quick and i really regret and im really happiest women like literally and getting all those without asking or begging for it and u just do in flow and u dont force yourself i never believed that i will end up like this just feel soo un real with you like ik you long but therila just feel soo happiest with u and everything with you feel unreal and i trust you soo much and thanks for giving everthing back and idk why u love me this much but i feel luckiest to made you feel like this soo u kissed me and i got you as man and all the things which i thought i will never experience in my way and actually u made it soo spl each and every moment ,literally you made to feel like have to live and experience everything with you, and i really really love to talk with you and you are giving space to share everything with you without any judgement love you soo much and you deserve more in this world and i would change myself just out of love i have on you , i dont known i feel you are more important and LOVE YOU SO MUCH ,i hope this continue until we stop walking in this earth and let hold each other hands and kiss each other until we are out of breath crave more for each other presence,you literally added soo much to my life like love,magic,trust,care,wonder,belief and you keeping adding more and more on it,the way you take care of me is really really making me thing like ARE YOU REAL this is like a movie or series which i grown up by seeing it just like dream and unreal scripted movie but you are REALLLLLLLL and the main part is YOU ARE MY BOYFRIENDDDD wowowowowowowo i cant just believe that soooo aws man of this generation and dino of the era is my boyfriend that is kind of flex and i can flex in all ways possible without doubt i really feel soo luck to have you for myself and i promise you will always be with you in all situation and in all up and downs ,my love,attention time everything you will get it first without ant question further i may not knowing little and i wish u tell and i would change for love i have on you , i thought i would be disturbing you and you u wont able to come and meet me frequently but u completely changed my POV of that thing you really really OBSESSED with MEEE ik u wont accept but u cant change the fact thooooo its 2:00 AM and i wish too write a letter but i tried something different ik this is easy but i hope you would love this and GOWTHAM i always love you sooo much and waitttttt i want to ask you very important question</p>
+<!-- SECTION 4 -->
+<section id="final">
+    <h1>YOU SAID YES 🥹💖</h1>
+    <div class="message">HAPPIEST VALENTINES DAY Maa love you so much my thanga pulla ik you can only say yes vera endha option illaa but nee vera endha option eduka mata maa love so much 💞</div>
+</section>
 
-        <!-- BUTTON INSIDE BOX -->
-        <button class="inside-btn" onclick="showSmallBox()">QUESTION❤️</button>
-    </div>
+<div class="sunflowers"></div>
 
-    <!-- Small Note Box -->
-    <div id="smallBox" style="
-        display:none;
-        position:absolute;
-        bottom:30px;
-        left:50%;
-        transform:translateX(-50%);
-        width:260px;
-        padding:15px;
-        background:#ffb3b3;
-        border-radius:15px;
-        box-shadow:0 4px 15px rgba(255,0,0,0.3);
-        text-align:center;
-        backdrop-filter:blur(4px);
-        background-image: radial-gradient(rgba(255,0,0,0.25), transparent);
-    ">
-        <h3 style="margin:0; color:#7a0000;">❤️GOWTHAM❤️</h3>
-        <p style="font-size:0.9rem; color:#7a0000;"> WILL YOU BE MINE AND CAN I BE YOURS TILL THE END???❤️</p>
-    </div>
+<script>
+function nextSection(id) {
+    document.querySelectorAll("section").forEach(sec => sec.classList.remove("active"));
+    document.getElementById(id).classList.add("active");
+}
 
-    <script>
+function yesLove() {
+    nextSection('final');
+}
 
-        function startAll() {
-            showTyping();
-            showLetter();
-        }
+/* RUNAWAY NO BUTTON */
+const noBtn = document.getElementById("noBtn");
+noBtn.addEventListener("mouseover", () => {
+    const x = Math.random() * (window.innerWidth - 100);
+    const y = Math.random() * (window.innerHeight - 100);
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+});
 
-        function showTyping() {
-            const msg = "THANKS FOR MAKING ME FEELED LOVE 💖";
-            document.getElementById("typing").innerHTML = msg;
-        }
-
-        function showLetter() {
-            setTimeout(() => {
-                document.getElementById('letterBox').classList.add('show');
-            }, 1500);
-        }
-
-        function showSmallBox() {
-            document.getElementById('smallBox').style.display = 'block';
-        }
-
-        /* Floating hearts */
-        function createHeart() {
-            const heart = document.createElement("div");
-            heart.classList.add("heart");
-            heart.innerHTML = "❤️";
-            heart.style.left = Math.random() * 100 + "vw";
-            heart.style.fontSize = (20 + Math.random() * 15) + "px";
-            heart.style.animationDuration = (3 + Math.random() * 4) + "s";
-            document.body.appendChild(heart);
-            setTimeout(() => heart.remove(), 6000);
-        }
-        setInterval(createHeart, 300);
-
-        /* Butterflies */
-        function createButterfly() {
-            const b = document.createElement("div");
-            b.classList.add("butterfly");
-            b.innerHTML = "🦋";
-            b.style.left = Math.random() * 100 + "vw";
-            b.style.animationDuration = (5 + Math.random() * 4) + "s";
-            document.body.appendChild(b);
-            setTimeout(() => b.remove(), 8000);
-        }
-        setInterval(createButterfly, 2000);
-
-        /* Sparkle around bow */
-        function makeSparkle() {
-            const s = document.createElement("div");
-            s.classList.add("sparkle");
-            s.innerHTML = "✨";
-            s.style.left = (window.innerWidth/2 + 120) + "px";
-            s.style.top = (window.innerHeight/2 - 120) + "px";
-            document.body.appendChild(s);
-            setTimeout(() => s.remove(), 1200);
-        }
-        setInterval(makeSparkle, 600);
-
-        /* Heart explosion on click */
-        function createExplosion(e) {
-            const heart = document.createElement("div");
-            heart.classList.add('explode');
-            heart.style.left = e.clientX + 'px';
-            heart.style.top = e.clientY + 'px';
-            heart.innerHTML = '💗';
-            document.body.appendChild(heart);
-            setTimeout(() => heart.remove(), 800);
-        }
-
-    </script>
+/* 🌻 Sunflowers floating */
+function createSunflower() {
+    const flower = document.createElement("span");
+    flower.innerHTML = "🌻";
+    flower.style.left = Math.random() * 100 + "vw";
+    flower.style.animationDuration = (Math.random() * 3 + 5) + "s";
+    document.querySelector(".sunflowers").appendChild(flower);
+    setTimeout(() => flower.remove(), 8000);
+}
+setInterval(createSunflower, 400);
+</script>
 
 </body>
 </html>
